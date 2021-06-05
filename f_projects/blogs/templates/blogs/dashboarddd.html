@@ -1,0 +1,306 @@
+{% extends "blogs/base.html" %}
+{% block content %}
+ <body style="background-color:#333435;">
+        <!--Chartjs CDN-->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
+    <center>
+<div class="col-md-8">
+    
+    <div class="container">
+        <h3 style="color:White;">SeaLanes Shipping Co. -  Dashboard</h3>
+        <div class="row">
+            <div class="col-sm-4 py-2">
+                <div class="card h-80 bg-success" style="background: linear-gradient(135deg, #23bdb8 0%, #43e794 100%) !important;">
+                    <div class="card-body">
+                        <center><h5 class="card-title" style="color:White;">Accepted Orders</h5></center>
+                        <center><h4 class="card-text" style="color:black;">{{to}}</h4></center>
+                    </div>
+                </div>
+            </div>
+    
+            <div class="col-sm-4 py-2">
+                <div class="card h-80 bg-primary" style="background:linear-gradient(135deg, #289cf5, #84c0ec) !important;">
+                    <div class="card-body">
+                        <center><h5 class="card-title" style="color:White;">Busiest Port</h5></center>
+                        <center><h4 class="card-text" style="color:black;">{{bur}}</h4></center>
+                    </div>
+                </div>
+            </div>
+    
+            <div class="col-sm-4 py-2">
+                <div class="card h-80 bg-danger" style="background: linear-gradient(to right, #ff5050 0%, #ff9999 100%);">
+                    <div class="card-body">
+                        <center><h5 class="card-title" style="color:White;">Rejected Orders</h5></center>
+                        <center><h4 class="card-text" style="color:black;">{{r}}</h4></center>
+                        
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-4 py-2">
+                <div class="card h-80 bg-success" style="background: linear-gradient(135deg,  #43e794 0%,#23bdb8 100%) !important;">
+                    <div class="card-body">
+                        <center><h5 class="card-title" style="color:White;">Latest Route</h5></center>
+                        <center><h4 class="card-text" style="color:black;">  <small> <strong>{{lo}} -> {{ld}} </strong> </small></h4></center>
+                    </div>
+                </div>
+            </div>
+    
+            <div class="col-sm-4 py-2">
+                <div class="card h-80 bg-primary" style="background:linear-gradient(135deg,#84c0ec, #289cf5 ) !important;">
+                    <div class="card-body">
+                        <center><h5 class="card-title" style="color:White;">Total Revenue</h5></center>
+                        <center><h4 class="card-text" style="color:black;">${{ct}}</h4></center>
+                    </div>
+                </div>
+            </div>
+    
+            <div class="col-sm-4 py-2">
+                <div class="card h-80 bg-danger" style="background: linear-gradient(to right, #ff9999 0%, #ff5050 100%);">
+                    <div class="card-body">
+                        <center><h5 class="card-title" style="color:White;">Urgent Orders</h5></center>
+                        <center><h4 class="card-text" style="color:black;">{{cu}}</h4></center>
+                        
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+    
+    
+    </center>
+    <br>
+    
+    
+    <div class="container" >
+        <h5 style="color:White;">&emsp;&emsp;&emsp;Proportions of Types of Goods&emsp;&emsp; &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Weight of Types of Goods</h5>
+    </div>
+    
+    <div class="row">
+    
+        <div class="col-md-5">
+            <canvas id="myChart" width="400" height="400"></canvas>
+        <script>
+        var ctx = document.getElementById('myChart').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels:['Eatable','Solids','Fluids'] ,
+                datasets: [{
+                    label: 'Types of Goods',
+                    data: [{{b}},{{c}},{{e}}],
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(153, 102, 255, 0.2)',
+                        'rgba(255, 159, 64, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+        </script>
+    
+    </div>
+    
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+    
+        <div class="col-md-5">
+            <canvas id="myChart2" width="400" height="400"></canvas>
+        <script>
+        var ctx = document.getElementById('myChart2').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            
+            data: {
+                labels:['Eatable','Fluids','Solids'] ,
+                datasets: [{
+                    label: "Weight of Goods" ,
+                    data: [{{ces}},{{cfs}},{{css}}],
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(153, 102, 255, 0.2)',
+                        'rgba(255, 159, 64, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+        </script>
+        </div>
+    
+    
+    </div>
+
+<br>
+<br>
+<div class="container" >
+    <h5 style="color:White;">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Revenue over Time &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Ship-wise Weights</h5>
+</div>
+
+<div class="row">
+
+    <div class="col-md-5">
+        <canvas id="dashboard" width="400" height="400"></canvas>
+    <script>
+    var ctx = document.getElementById('dashboard').getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels:{{labels|safe}} ,
+            datasets: [{
+                label: 'Revenue over Time',
+                data: {{data|safe}},
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+    </script>
+
+</div>
+
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+
+<div class="col-md-5">
+    <canvas id="myChart4" width="400" height="400"></canvas>
+<script>
+var ctx = document.getElementById('myChart4').getContext('2d');
+var myChart = new Chart(ctx, {
+    type: 'horizontalBar',
+    
+    data: {
+        labels:['MCP-107','MCH-104','MO-103','CPM-106','CPCH-110','CPO-112','CHM-105','CHCP-109','CHO-114','OM-102','OCP-111','OCH-113'] ,
+        datasets: [{
+            label: "Shipwise Weight" ,
+            data:[{{aa}},{{bb}},{{cc}},{{dd}},{{ee}},{{ff}},{{gg}},{{hh}},{{ii}},{{jj}},{{kk}},{{ll}}],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)'
+            
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    }
+});
+</script>
+</div>
+
+
+</div>
+
+
+</div>
+    
+    </div>
+    
+ </body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock content %}

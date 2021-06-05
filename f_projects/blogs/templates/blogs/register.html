@@ -1,0 +1,99 @@
+{% extends "blogs/base.html" %}
+{% block content %}
+<div class="col-md-8">
+    <center><h3>SeaLanes Shipping Co. - Order Registration</h3></center>
+    <br>
+<form action="/submit/" method="POST" >
+  {%csrf_token%}
+
+    <div class="form-group">
+      <label for="exampleFormControlInput1">Sender Name</label>
+      <input type="text" class="form-control"  placeholder="Sender Name" name="sen_name">
+    </div>
+
+    <div class="form-group">
+        <label for="exampleFormControlTextarea1">Sender Address</label>
+        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="sen_add"></textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="exampleFormControlTextarea1">Sender Phone</label>
+        <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Sender's Phone Number" name="sen_ph">
+    </div>
+  
+    <div class="form-group">
+      <label for="exampleFormControlInput1">Sender email</label>
+      <input type="email" class="form-control"  placeholder="Sender email" name="sem">
+    </div>
+
+    <div class="form-group">
+        <label for="exampleFormControlInput1">Reciever Name</label>
+        <input type="text" class="form-control"  placeholder="Reciever Name" name="rec_name">
+    </div>
+
+    <div class="form-group">
+        <label for="exampleFormControlTextarea1">Reciever Address</label>
+        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="rec_add"></textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="exampleFormControlTextarea1">Reciever Phone</label>
+        <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Reciever's Phone Number" name="rec_ph">
+    </div>
+
+    <div class="form-group">
+      <label for="exampleFormControlInput1">Reciever email</label>
+      <input type="email" class="form-control"  placeholder="Reciever email" name="rem">
+    </div>
+
+    <div class="form-group">
+      <label for="exampleFormControlSelect1">Type Of Goods</label>
+      <select class="form-control" id="exampleFormControlSelect1" name="t_g">
+        <option>Eatables</option>
+        <option>Solids</option>
+        <option>Fluids</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="exampleFormControlSelect1">Weight Of Goods</label>
+      <input type="number" class="form-control" id="exampleFormControlInput1" placeholder="Enter value between(1-100)" name="weight">
+    </div>
+
+    <div class="form-group">
+        <label for="exampleFormControlSelect1">Orgin</label>
+        <select class="form-control" id="exampleFormControlSelect1" name="orgin">
+          <option>Miami</option>
+          <option>Cape Town</option>
+          <option>Chennai</option>
+          <option>Osaka</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="exampleFormControlSelect1">Destination</label>
+        <select class="form-control" id="exampleFormControlSelect1" name="dest">
+          <option>Miami</option>
+          <option>Cape Town</option>
+          <option>Chennai</option>
+          <option>Osaka</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="exampleFormControlSelect1">Priority</label>
+        <select class="form-control" id="exampleFormControlSelect1" name="pri">
+            <option>Urgent</option>
+            <option>Ordinary</option>
+        </select>
+    </div>
+
+
+
+    <div class="form-group">
+        <button type="submit" class="btn btn-default">Submit</button>
+    </div>
+  </form>
+
+</div>
+{% endblock content %}

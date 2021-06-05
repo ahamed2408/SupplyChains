@@ -1,0 +1,506 @@
+{%load static%}
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+	<title>Supply Chain</title>
+	<style>
+		header {
+  position: relative;
+  background-color: black;
+  height: auto;
+  min-height: auto;
+  width: 100%;
+  overflow: hidden;
+}
+
+header video {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  z-index: 0;
+  -ms-transform: translateX(-50%) translateY(-50%);
+  -moz-transform: translateX(-50%) translateY(-50%);
+  -webkit-transform: translateX(-50%) translateY(-50%);
+  transform: translateX(-50%) translateY(-50%);
+}
+
+header .container {
+  position: relative;
+  z-index: 2;
+}
+
+header .overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: black;
+  opacity: 0.5;
+  z-index: 1;
+}
+
+.banner-text{
+	padding:200px 0 150px 0;
+}
+.banner-heading{
+	font-family: 'Lobster';
+	font-size: 50px;
+    font-weight: 700;
+    line-height: 100px;
+    margin-bottom: 30px;
+	color:#fff;
+	text-shadow: 2px;
+
+}
+
+.banner-sub-heading{
+	font-family: 'Libre Baskerville', serif;
+	font-size: 30px;
+    font-weight: 300;
+    line-height: 30px;
+    margin-bottom: 50px;
+	color:#fff;
+}
+
+.btn-banner{
+	padding:5px 20px;
+	border-radius:10px;
+	font-weight:700;
+	line-height:1.5;
+	text-align:center;
+	color:#fff;
+	text-transform:uppercase;
+}
+.text-intro{
+	width:90%;
+	margin:auto;
+	text-align:center;
+	padding-top:30px;
+}
+#logo{ 
+	position:fixed; 
+	top:2; 
+	left:0; 
+
+} 
+#logo2{ 
+	position:fixed; 
+	top:2; 
+	right:0; 
+
+} 
+
+
+
+@media (pointer: coarse) and (hover: none) {
+  header {
+    background: url('https://source.unsplash.com/XT5OInaElMw/1600x900') black no-repeat center center scroll;
+  }
+  header video {
+    display: none;
+  }
+}
+	</style>	
+</head>
+<body>
+
+
+	<header>
+  <div class="overlay"></div>
+  <video playsinline="playsinline" autoplay="autoplay" muted="muted" loop="loop">
+    <source src="{% static 'blogs/squares.mp4' %}" type="video/mp4">
+  </video>
+  <div class="container h-100">
+  	<div id="logo"> 
+        <a class="nav-item nav-link" href="{% url 'blogs-home' %}"> <button type="button" class="btn btn-warning text-dark btn-banner" >GO BACK TO PORTAL</button></a>    
+    </div>
+    <div id="logo2"> 
+        <a class="nav-item nav-link" href="{% url 'blogs-home' %}"> <button type="button" class="btn btn-warning text-dark btn-banner" >GO BACK TO PORTAL</button></a>    
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
+    <center>
+        <br>
+        <br>
+        
+        <p class="banner-heading"><big>SeaLanes - DashBoard</big></p>
+        
+
+<div class="col-md-8">
+    
+    <div class="container">
+        
+        <div class="row">
+            <div class="col-sm-4 py-2">
+                <div class="card h-80 bg-success" style="background: linear-gradient(135deg, #23bdb8 0%, #43e794 100%) !important;">
+                    <div class="card-body">
+                        <center><h5 class="card-title" style="color:White;">Accepted Orders</h5></center>
+                        <center><h4 class="card-text" style="color:black;">{{to}}</h4></center>
+                    </div>
+                </div>
+            </div>
+    
+            <div class="col-sm-4 py-2">
+                <div class="card h-80 bg-primary" style="background:linear-gradient(135deg, #289cf5, #84c0ec) !important;">
+                    <div class="card-body">
+                        <center><h5 class="card-title" style="color:White;">Busiest Port</h5></center>
+                        <center><h4 class="card-text" style="color:black;">{{bur}}</h4></center>
+                    </div>
+                </div>
+            </div>
+    
+            <div class="col-sm-4 py-2">
+                <div class="card h-80 bg-danger" style="background: linear-gradient(to right, #ff5050 0%, #ff9999 100%);">
+                    <div class="card-body">
+                        <center><h5 class="card-title" style="color:White;">Rejected Orders</h5></center>
+                        <center><h4 class="card-text" style="color:black;">{{r}}</h4></center>
+                        
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-4 py-2">
+                <div class="card h-80 bg-success" style="background: linear-gradient(135deg,  #43e794 0%,#23bdb8 100%) !important;">
+                    <div class="card-body">
+                        <center><h5 class="card-title" style="color:White;">Latest Route</h5></center>
+                        <center><h4 class="card-text" style="color:black;">  <small> <strong>{{lo}} -> {{ld}} </strong> </small></h4></center>
+                    </div>
+                </div>
+            </div>
+    
+            <div class="col-sm-4 py-2">
+                <div class="card h-80 bg-primary" style="background:linear-gradient(135deg,#84c0ec, #289cf5 ) !important;">
+                    <div class="card-body">
+                        <center><h5 class="card-title" style="color:White;">Total Revenue</h5></center>
+                        <center><h4 class="card-text" style="color:black;">${{ct}}</h4></center>
+                    </div>
+                </div>
+            </div>
+    
+            <div class="col-sm-4 py-2">
+                <div class="card h-80 bg-danger" style="background: linear-gradient(to right, #ff9999 0%, #ff5050 100%);">
+                    <div class="card-body">
+                        <center><h5 class="card-title" style="color:White;">Urgent Orders</h5></center>
+                        <center><h4 class="card-text" style="color:black;">{{cu}}</h4></center>
+                        
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+    
+    
+    </center>
+    <br>
+    
+    
+    <div class="container" >
+        <h5 style="color:White;">&emsp;&emsp;&emsp;Proportions of Types of Goods&emsp;&emsp; &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Weight of Types of Goods</h5>
+    </div>
+    
+    <div class="row">
+    
+        <div class="col-md-5">
+            <canvas id="myChart" width="400" height="400"></canvas>
+        <script>
+        var ctx = document.getElementById('myChart').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels:['Eatable','Solids','Fluids'] ,
+                datasets: [{
+                    label: 'Types of Goods',
+                    data: [{{b}},{{c}},{{e}}],
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(153, 102, 255, 0.2)',
+                        'rgba(255, 159, 64, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+
+                legend:{
+                    labels:{
+                        fontColor: "white"
+                    }
+                },
+
+                scales: {
+
+                    
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+        </script>
+    
+    </div>
+    
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+    
+        <div class="col-md-5">
+            <canvas id="myChart2" width="400" height="400"></canvas>
+        <script>
+        var ctx = document.getElementById('myChart2').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            
+            data: {
+                labels:['Eatable','Fluids','Solids'] ,
+                datasets: [{
+                    label: "Weight of Goods" ,
+                    data: [{{ces}},{{cfs}},{{css}}],
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(153, 102, 255, 0.2)',
+                        'rgba(255, 159, 64, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+            
+                legend:{
+                    display: false,
+                },
+
+                scales: {
+
+                    xAxes: [{ 
+                        gridLines: {
+                            display: true,
+                        },
+                        ticks: {
+                          fontColor: "white", // this here
+                        },
+                    }],
+        
+                    yAxes: [{ 
+                        gridLines: {
+                            display: true,
+                        },
+                        ticks: {
+                          fontColor: "white", // this here
+                        },
+                    }],
+        
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+        </script>
+        </div>
+    
+    
+    </div>
+
+<br>
+<br>
+<div class="container" >
+    <h5 style="color:White;">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Revenue over Time &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Ship-wise Weights</h5>
+</div>
+
+<div class="row">
+
+    <div class="col-md-5">
+        <canvas id="dashboard" width="400" height="400"></canvas>
+    <script>
+    var ctx = document.getElementById('dashboard').getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels:{{labels|safe}} ,
+            datasets: [{
+                label: 'Revenue over Time',
+                data: {{data|safe}},
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+
+            legend:{
+                display: false,
+            },
+
+            scales: {
+
+                xAxes: [{ 
+                    gridLines: {
+                        display: true,
+                    },
+                    ticks: {
+                      fontColor: "white", // this here
+                    },
+                }],
+    
+                yAxes: [{ 
+                    gridLines: {
+                        display: true,
+                    },
+                    ticks: {
+                      fontColor: "white", // this here
+                    },
+                }],
+    
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+    </script>
+
+</div>
+
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+
+<div class="col-md-5">
+    <canvas id="myChart4" width="400" height="400"></canvas>
+<script>
+var ctx = document.getElementById('myChart4').getContext('2d');
+var myChart = new Chart(ctx, {
+    type: 'horizontalBar',
+    
+    data: {
+        labels:['MCP-107','MCH-104','MO-103','CPM-106','CPCH-110','CPO-112','CHM-105','CHCP-109','CHO-114','OM-102','OCP-111','OCH-113'] ,
+        datasets: [{
+            label: "Shipwise Weight" ,
+            data:[{{aa}},{{bb}},{{cc}},{{dd}},{{ee}},{{ff}},{{gg}},{{hh}},{{ii}},{{jj}},{{kk}},{{ll}}],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)'
+            
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+            ],
+            borderWidth: 1
+        }]
+    },
+
+    options: {
+        legend:{
+            display: false,
+        },
+
+        scales: {
+            xAxes: [{ 
+                gridLines: {
+                    display: true,
+                },
+                ticks: {
+                  fontColor: "white", // this here
+                },
+            }],
+
+            yAxes: [{ 
+                gridLines: {
+                    display: true,
+                },
+                ticks: {
+                  fontColor: "white", // this here
+                },
+            }],
+
+
+            y: {
+                beginAtZero: true
+                
+            }
+        }
+    }
+});
+</script>
+</div>
+
+
+</div>
+
+
+</div>
+    
+    </div>
+  </div>
+  
+    <a class="nav-item nav-link" href="{% url 'blogs-home' %}"> <button type="button" class="btn btn-warning text-dark btn-banner" >GET INTO PORTAL</button></a>
+</header>
+
+</body>
+</html>
